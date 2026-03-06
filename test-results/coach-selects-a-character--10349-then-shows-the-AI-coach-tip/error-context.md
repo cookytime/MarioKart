@@ -1,0 +1,293 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: 🏎️ MARIO KART WORLD
+      - generic [ref=e6]: BEST KART COMBO FINDER — SWITCH 2 — ALL 50 CHARACTERS
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - generic [ref=e10]: 1 · CHARACTER (50)
+          - textbox "Search characters…" [ref=e11]
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]: FEATHERWEIGHT
+            - button "👶 Baby Mario" [ref=e15] [cursor=pointer]:
+              - generic [ref=e16]: 👶
+              - generic [ref=e18]: Baby Mario
+            - button "👶 Baby Luigi" [ref=e19] [cursor=pointer]:
+              - generic [ref=e20]: 👶
+              - generic [ref=e22]: Baby Luigi
+            - button "👶 Baby Peach" [ref=e23] [cursor=pointer]:
+              - generic [ref=e24]: 👶
+              - generic [ref=e26]: Baby Peach
+            - button "👶 Baby Daisy" [ref=e27] [cursor=pointer]:
+              - generic [ref=e28]: 👶
+              - generic [ref=e30]: Baby Daisy
+            - button "👶 Baby Rosalina" [ref=e31] [cursor=pointer]:
+              - generic [ref=e32]: 👶
+              - generic [ref=e34]: Baby Rosalina
+            - button "🟤 Goomba" [ref=e35] [cursor=pointer]:
+              - generic [ref=e36]: 🟤
+              - generic [ref=e38]: Goomba
+            - button "💀 Dry Bones" [ref=e39] [cursor=pointer]:
+              - generic [ref=e40]: 💀
+              - generic [ref=e42]: Dry Bones
+            - button "🦋 Para-Biddybud" [ref=e43] [cursor=pointer]:
+              - generic [ref=e44]: 🦋
+              - generic [ref=e46]: Para-Biddybud
+            - button "🦀 Sidestepper" [ref=e47] [cursor=pointer]:
+              - generic [ref=e48]: 🦀
+              - generic [ref=e50]: Sidestepper
+            - button "⚡ Spike 🔒 Kamek (Whistlestop Summit)" [ref=e51] [cursor=pointer]:
+              - generic [ref=e52]: ⚡
+              - generic [ref=e53]:
+                - generic [ref=e54]: Spike
+                - generic [ref=e55]: 🔒 Kamek (Whistlestop Summit)
+            - button "🦇 Swoop 🔒 Kamek (Dandelion Depths)" [ref=e56] [cursor=pointer]:
+              - generic [ref=e57]: 🦇
+              - generic [ref=e58]:
+                - generic [ref=e59]: Swoop
+                - generic [ref=e60]: 🔒 Kamek (Dandelion Depths)
+            - button "👁️ Peepa 🔒 Kamek (Boo Cinema)" [ref=e61] [cursor=pointer]:
+              - generic [ref=e62]: 👁️
+              - generic [ref=e63]:
+                - generic [ref=e64]: Peepa
+                - generic [ref=e65]: 🔒 Kamek (Boo Cinema)
+            - button "🦴 Fish Bone 🔒 Kamek (Toad's Factory→Dry Bones Burnout)" [ref=e66] [cursor=pointer]:
+              - generic [ref=e67]: 🦴
+              - generic [ref=e68]:
+                - generic [ref=e69]: Fish Bone
+                - generic [ref=e70]: 🔒 Kamek (Toad's Factory→Dry Bones Burnout)
+          - generic [ref=e71]:
+            - generic [ref=e72]: LIGHT
+            - button "🍄 Toad" [ref=e73] [cursor=pointer]:
+              - generic [ref=e74]: 🍄
+              - generic [ref=e76]: Toad
+            - button "🎀 Toadette" [ref=e77] [cursor=pointer]:
+              - generic [ref=e78]: 🎀
+              - generic [ref=e80]: Toadette
+            - button "😶 Shy Guy" [ref=e81] [cursor=pointer]:
+              - generic [ref=e82]: 😶
+              - generic [ref=e84]: Shy Guy
+            - button "☁️ Lakitu 🔒 Shell Cup" [ref=e85] [cursor=pointer]:
+              - generic [ref=e86]: ☁️
+              - generic [ref=e87]:
+                - generic [ref=e88]: Lakitu
+                - generic [ref=e89]: 🔒 Shell Cup
+            - button "🐢 Koopa Troopa" [ref=e90] [cursor=pointer]:
+              - generic [ref=e91]: 🐢
+              - generic [ref=e93]: Koopa Troopa
+            - button "🐟 Cheep Cheep" [ref=e94] [cursor=pointer]:
+              - generic [ref=e95]: 🐟
+              - generic [ref=e97]: Cheep Cheep
+            - button "🐝 Stingby" [ref=e98] [cursor=pointer]:
+              - generic [ref=e99]: 🐝
+              - generic [ref=e101]: Stingby
+            - button "🐰 Nabbit" [ref=e102] [cursor=pointer]:
+              - generic [ref=e103]: 🐰
+              - generic [ref=e105]: Nabbit
+          - generic [ref=e106]:
+            - generic [ref=e107]: MED-LIGHT
+            - button "👸 Peach" [ref=e108] [cursor=pointer]:
+              - generic [ref=e109]: 👸
+              - generic [ref=e111]: Peach
+            - button "🌼 Daisy 🔒 Flower Cup" [ref=e112] [cursor=pointer]:
+              - generic [ref=e113]: 🌼
+              - generic [ref=e114]:
+                - generic [ref=e115]: Daisy
+                - generic [ref=e116]: 🔒 Flower Cup
+            - button "🐢 Bowser Jr. 🔒 Lightning Cup" [ref=e117] [cursor=pointer]:
+              - generic [ref=e118]: 🐢
+              - generic [ref=e119]:
+                - generic [ref=e120]: Bowser Jr.
+                - generic [ref=e121]: 🔒 Lightning Cup
+            - button "🦖 Yoshi" [ref=e122] [cursor=pointer]:
+              - generic [ref=e123]: 🦖
+              - generic [ref=e125]: Yoshi
+            - button "🎀 Birdo 🔒 Banana Cup" [ref=e126] [cursor=pointer]:
+              - generic [ref=e127]: 🎀
+              - generic [ref=e128]:
+                - generic [ref=e129]: Birdo
+                - generic [ref=e130]: 🔒 Banana Cup
+            - button "🐾 Monty Mole" [ref=e131] [cursor=pointer]:
+              - generic [ref=e132]: 🐾
+              - generic [ref=e134]: Monty Mole
+            - button "💰 Coin Coffer 🔒 Kamek (unlock via race)" [ref=e135] [cursor=pointer]:
+              - generic [ref=e136]: 💰
+              - generic [ref=e137]:
+                - generic [ref=e138]: Coin Coffer
+                - generic [ref=e139]: 🔒 Kamek (unlock via race)
+            - button "�� Dolphin 🔒 Kamek (unlock via race)" [ref=e140] [cursor=pointer]:
+              - generic [ref=e141]: ��
+              - generic [ref=e142]:
+                - generic [ref=e143]: Dolphin
+                - generic [ref=e144]: 🔒 Kamek (unlock via race)
+          - generic [ref=e145]:
+            - generic [ref=e146]: MEDIUM
+            - button "🔴 Mario" [ref=e147] [cursor=pointer]:
+              - generic [ref=e148]: 🔴
+              - generic [ref=e150]: Mario
+            - button "🟢 Luigi" [ref=e151] [cursor=pointer]:
+              - generic [ref=e152]: 🟢
+              - generic [ref=e154]: Luigi
+            - button "🌵 Pokey" [ref=e155] [cursor=pointer]:
+              - generic [ref=e156]: 🌵
+              - generic [ref=e158]: Pokey
+            - button "🔨 Hammer Bro" [ref=e159] [cursor=pointer]:
+              - generic [ref=e160]: 🔨
+              - generic [ref=e162]: Hammer Bro
+            - button "🐧 Penguin" [ref=e163] [cursor=pointer]:
+              - generic [ref=e164]: 🐧
+              - generic [ref=e166]: Penguin
+            - button "🔧 Rocky Wrench 🔒 Kamek (unlock via race)" [ref=e167] [cursor=pointer]:
+              - generic [ref=e168]: 🔧
+              - generic [ref=e169]:
+                - generic [ref=e170]: Rocky Wrench
+                - generic [ref=e171]: 🔒 Kamek (unlock via race)
+          - generic [ref=e172]:
+            - generic [ref=e173]: MED-HEAVY
+            - button "⭐ Rosalina 🔒 Star Cup" [ref=e174] [cursor=pointer]:
+              - generic [ref=e175]: ⭐
+              - generic [ref=e176]:
+                - generic [ref=e177]: Rosalina
+                - generic [ref=e178]: 🔒 Star Cup
+            - button "🎤 Pauline" [ref=e179] [cursor=pointer]:
+              - generic [ref=e180]: 🎤
+              - generic [ref=e182]: Pauline
+            - button "👻 King Boo 🔒 Leaf Cup" [ref=e183] [cursor=pointer]:
+              - generic [ref=e184]: 👻
+              - generic [ref=e185]:
+                - generic [ref=e186]: King Boo
+                - generic [ref=e187]: 🔒 Leaf Cup
+            - button "🌱 Piranha Plant" [ref=e188] [cursor=pointer]:
+              - generic [ref=e189]: 🌱
+              - generic [ref=e191]: Piranha Plant
+            - button "⛄ Snowman" [ref=e192] [cursor=pointer]:
+              - generic [ref=e193]: ⛄
+              - generic [ref=e195]: Snowman
+            - button "🦆 Cataquack 🔒 Kamek (unlock via race)" [ref=e196] [cursor=pointer]:
+              - generic [ref=e197]: 🦆
+              - generic [ref=e198]:
+                - generic [ref=e199]: Cataquack
+                - generic [ref=e200]: 🔒 Kamek (unlock via race)
+            - button "🦅 Conkdor 🔒 Kamek (unlock via race)" [ref=e201] [cursor=pointer]:
+              - generic [ref=e202]: 🦅
+              - generic [ref=e203]:
+                - generic [ref=e204]: Conkdor
+                - generic [ref=e205]: 🔒 Kamek (unlock via race)
+          - generic [ref=e206]:
+            - generic [ref=e207]: HEAVY
+            - button "💛 Wario" [ref=e208] [cursor=pointer]:
+              - generic [ref=e209]: 💛
+              - generic [ref=e211]: Wario
+            - button "🎩 Waluigi" [ref=e212] [cursor=pointer]:
+              - generic [ref=e213]: 🎩
+              - generic [ref=e215]: Waluigi
+            - button "🦍 Donkey Kong 🔒 Mushroom Cup" [active] [ref=e216] [cursor=pointer]:
+              - generic [ref=e217]: 🦍
+              - generic [ref=e218]:
+                - generic [ref=e219]: Donkey Kong
+                - generic [ref=e220]: 🔒 Mushroom Cup
+            - button "🐛 Wiggler" [ref=e221] [cursor=pointer]:
+              - generic [ref=e222]: 🐛
+              - generic [ref=e224]: Wiggler
+            - button "🐄 Cow" [ref=e225] [cursor=pointer]:
+              - generic [ref=e226]: 🐄
+              - generic [ref=e228]: Cow
+            - button "🏈 Chargin' Chuck 🔒 Kamek (unlock via race)" [ref=e229] [cursor=pointer]:
+              - generic [ref=e230]: 🏈
+              - generic [ref=e231]:
+                - generic [ref=e232]: Chargin' Chuck
+                - generic [ref=e233]: 🔒 Kamek (unlock via race)
+            - button "🌴 Pianta 🔒 Kamek (unlock via race)" [ref=e234] [cursor=pointer]:
+              - generic [ref=e235]: 🌴
+              - generic [ref=e236]:
+                - generic [ref=e237]: Pianta
+                - generic [ref=e238]: 🔒 Kamek (unlock via race)
+          - generic [ref=e239]:
+            - generic [ref=e240]: HEAVYWEIGHT
+            - button "🐉 Bowser" [ref=e241] [cursor=pointer]:
+              - generic [ref=e242]: 🐉
+              - generic [ref=e244]: Bowser
+      - generic [ref=e245]:
+        - generic [ref=e247]: 2 · CUP & COURSE
+        - generic [ref=e248]:
+          - button "🍄 Mushroom Cup ▼" [ref=e250] [cursor=pointer]:
+            - generic [ref=e251]: 🍄
+            - generic [ref=e252]: Mushroom Cup
+            - generic [ref=e253]: ▼
+          - button "🌸 Flower Cup ▼" [ref=e255] [cursor=pointer]:
+            - generic [ref=e256]: 🌸
+            - generic [ref=e257]: Flower Cup
+            - generic [ref=e258]: ▼
+          - button "⭐ Star Cup ▼" [ref=e260] [cursor=pointer]:
+            - generic [ref=e261]: ⭐
+            - generic [ref=e262]: Star Cup
+            - generic [ref=e263]: ▼
+          - button "🐚 Shell Cup ▼" [ref=e265] [cursor=pointer]:
+            - generic [ref=e266]: 🐚
+            - generic [ref=e267]: Shell Cup
+            - generic [ref=e268]: ▼
+          - button "🍌 Banana Cup ▼" [ref=e270] [cursor=pointer]:
+            - generic [ref=e271]: 🍌
+            - generic [ref=e272]: Banana Cup
+            - generic [ref=e273]: ▼
+          - button "🍂 Leaf Cup ▼" [ref=e275] [cursor=pointer]:
+            - generic [ref=e276]: 🍂
+            - generic [ref=e277]: Leaf Cup
+            - generic [ref=e278]: ▼
+          - button "⚡ Lightning Cup ▼" [ref=e280] [cursor=pointer]:
+            - generic [ref=e281]: ⚡
+            - generic [ref=e282]: Lightning Cup
+            - generic [ref=e283]: ▼
+          - button "🌈 Special Cup 👑 🔒 ▼" [ref=e285] [cursor=pointer]:
+            - generic [ref=e286]: 🌈
+            - generic [ref=e287]: Special Cup 👑
+            - generic [ref=e288]: 🔒
+            - generic [ref=e289]: ▼
+      - generic [ref=e291]:
+        - generic [ref=e293]:
+          - generic [ref=e294]: 🦍
+          - generic [ref=e295]:
+            - generic [ref=e296]: Donkey Kong
+            - generic [ref=e297]: Heavy
+            - generic [ref=e298]: 🔒 Mushroom Cup
+        - generic [ref=e299]:
+          - generic [ref=e300]: ⭐ BEST KART COMBO
+          - generic [ref=e301]:
+            - generic [ref=e302]:
+              - generic [ref=e303]: 🏎️
+              - generic [ref=e304]: Stellar Sled
+              - generic [ref=e305]: PRIMARY
+            - generic [ref=e306]:
+              - generic [ref=e307]: 🔄
+              - generic [ref=e308]: Chargin' Truck
+              - generic [ref=e309]: ALT
+            - generic [ref=e310]:
+              - generic [ref=e311]: 🎯
+              - generic [ref=e312]: SPEED
+              - generic [ref=e313]: FOCUS
+        - generic [ref=e314]:
+          - generic [ref=e315]: 📊 COMBO STATS
+          - generic [ref=e317]:
+            - generic [ref=e318]: ★ Speed
+            - generic [ref=e319]: "68"
+          - generic [ref=e323]:
+            - generic [ref=e324]: Accel
+            - generic [ref=e325]: "40"
+          - generic [ref=e329]:
+            - generic [ref=e330]: Weight
+            - generic [ref=e331]: "58"
+          - generic [ref=e335]:
+            - generic [ref=e336]: Handling
+            - generic [ref=e337]: "36"
+        - generic [ref=e340]:
+          - generic [ref=e341]: 🤖 AI COACH TIP
+          - paragraph [ref=e342]: Select both a character and a course for a tailored coaching tip.
+  - button "Open Next.js Dev Tools" [ref=e349] [cursor=pointer]:
+    - img [ref=e350]
+  - alert [ref=e353]
+```

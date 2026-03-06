@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@playwright/test": "^1.58.2",
     "@vercel/analytics": "^1.6.1",
     "next": "15.2.8",
     "react": "19.0.0",
