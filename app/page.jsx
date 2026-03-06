@@ -249,20 +249,18 @@ export default function App() {
   const fetchTip = async (char, course, cmb) => {
     setAiTip(""); setAiLoading(true);
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({
-          model:"claude-sonnet-4-20250514", max_tokens:1000,
-          system:"You are an expert Mario Kart World (Switch 2, 2025) coach. Give sharp, course-specific tips. 3-4 sentences, no bullets, coach voice.",
-          messages:[{ role:"user", content:
-            `Tip for ${char.name} (${char.weight}, S:${char.s}/A:${char.a}/W:${char.w}/H:${char.h}) with the ${cmb.kart} kart on ${course.name} (${course.isNew?"new course":"retro course"}). Terrain: ${course.terrain}, ${course.straights}% straights, ${course.turns}% turns, ${course.offroad}% off-road. Stat priority: ${cmb.focus}. Give a tactical tip specific to this course's challenges.`
-          }]
-        })
+      const res = await fetch("/api/coach", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ character: char, course, combo: cmb })
       });
       const d = await res.json();
-      setAiTip(d.content?.find(b=>b.type==="text")?.text || "No response.");
-    } catch { setAiTip("Couldn't reach the coaching booth right now."); }
-    finally  { setAiLoading(false); }
+      setAiTip(d.tip || "No response.");
+    } catch {
+      setAiTip("Couldn't reach the coaching booth right now.");
+    } finally {
+      setAiLoading(false);
+    }
   };
 
   const selectChar = c => {
