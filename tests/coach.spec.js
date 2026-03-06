@@ -20,7 +20,10 @@ test("selects a character and course, then shows the AI coach tip", async ({ pag
 
   // ── 2. Expand the Mushroom Cup and select Crown City ─────────────────────
   await page.getByRole("button", { name: /Mushroom Cup/ }).first().click();
-  await page.getByRole("button", { name: /Crown City/ }).first().click();
+  // Wait for the accordion to expand before clicking the course
+  const crownCity = page.getByRole("button", { name: /Crown City/ }).first();
+  await expect(crownCity).toBeVisible();
+  await crownCity.click();
 
   // ── 3. Coach tip should appear ────────────────────────────────────────────
   // Wait for loading state to clear and the mocked tip to render
