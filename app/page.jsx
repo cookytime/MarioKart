@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // ── ACTUAL MKW CUPS & COURSES (verified) ─────────────────────────────────────
 // Source: Game8, MarioWiki, NintendoLife
@@ -198,18 +198,18 @@ const weightOrder = ["Featherweight","Light","Med-Light","Medium","Med-Heavy","H
 
 // ── COMPONENTS ────────────────────────────────────────────────────────────────
 const StatBar = ({ label, value, color, highlight }) => (
-  <div style={{ marginBottom:"8px" }}>
-    <div style={{ display:"flex", justifyContent:"space-between", marginBottom:"3px" }}>
-      <span style={{ fontSize:"10px", color: highlight?"#fff":"#999", fontWeight: highlight?"bold":"normal" }}>
+  <div style={{ marginBottom:"12px" }}>
+    <div style={{ display:"flex", justifyContent:"space-between", marginBottom:"4px" }}>
+      <span style={{ fontSize:"14px", color: highlight?"#fff":"#999", fontWeight: highlight?"bold":"normal" }}>
         {highlight && "★ "}{label}
       </span>
-      <span style={{ fontSize:"10px", color }}>{value}</span>
+      <span style={{ fontSize:"14px", color }}>{value}</span>
     </div>
-    <div style={{ height:"7px", background:"#111", borderRadius:"4px", overflow:"hidden", border:"1px solid #2a2a3a" }}>
+    <div style={{ height:"10px", background:"#111", borderRadius:"5px", overflow:"hidden", border:"1px solid #2a2a3a" }}>
       <div style={{
         height:"100%", width:`${value}%`,
         background: highlight ? `linear-gradient(90deg,${color},#fff8)` : color,
-        borderRadius:"4px", transition:"width 0.5s cubic-bezier(.34,1.56,.64,1)",
+        borderRadius:"5px", transition:"width 0.5s cubic-bezier(.34,1.56,.64,1)",
         boxShadow:`0 0 ${highlight?10:4}px ${color}77`
       }} />
     </div>
@@ -217,12 +217,12 @@ const StatBar = ({ label, value, color, highlight }) => (
 );
 
 const MiniBar = ({ label, value, color }) => (
-  <div style={{ marginBottom:"5px" }}>
-    <div style={{ display:"flex", justifyContent:"space-between", marginBottom:"2px" }}>
-      <span style={{ fontSize:"9px", color:"#777" }}>{label}</span>
-      <span style={{ fontSize:"9px", color }}>{value}%</span>
+  <div style={{ marginBottom:"10px" }}>
+    <div style={{ display:"flex", justifyContent:"space-between", marginBottom:"4px" }}>
+      <span style={{ fontSize:"13px", color:"#777" }}>{label}</span>
+      <span style={{ fontSize:"13px", color }}>{value}%</span>
     </div>
-    <div style={{ height:"4px", background:"#111", borderRadius:"2px", overflow:"hidden" }}>
+    <div style={{ height:"8px", background:"#111", borderRadius:"4px", overflow:"hidden" }}>
       <div style={{ height:"100%", width:`${value}%`, background:color, transition:"width 0.4s ease" }} />
     </div>
   </div>
@@ -236,6 +236,15 @@ export default function App() {
   const [search,    setSearch]    = useState("");
   const [aiTip,     setAiTip]     = useState("");
   const [aiLoading, setAiLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("characters");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 900);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const filtered = characters.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
   const grouped  = {};
@@ -278,35 +287,62 @@ export default function App() {
     <div style={{ minHeight:"100vh", background:"linear-gradient(135deg,#0d0b1e,#1a1640,#12102a)", color:"#fff", fontFamily:"system-ui,sans-serif", display:"flex", flexDirection:"column" }}>
       <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
       <div style={{ height:"4px", background:"linear-gradient(90deg,#e74c3c,#e67e22,#f1c40f,#2ecc71,#3498db,#9b59b6)", flexShrink:0 }} />
-      <div style={{ padding:"12px 20px 8px", textAlign:"center", background:"rgba(0,0,0,.4)", borderBottom:"1px solid #ffffff15", flexShrink:0 }}>
-        <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"12px", color:"#f1c40f", textShadow:"2px 2px 0 #c0392b", letterSpacing:"1px" }}>🏎️ MARIO KART WORLD</div>
-        <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"6px", color:"#555", marginTop:"4px" }}>BEST KART COMBO FINDER — SWITCH 2 — ALL 50 CHARACTERS</div>
+      <div style={{ padding: isMobile ? "16px 16px 12px" : "16px 24px 12px", textAlign:"center", background:"rgba(0,0,0,.4)", borderBottom:"1px solid #ffffff15", flexShrink:0 }}>
+        <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize: isMobile ? "14px" : "18px", color:"#f1c40f", textShadow:"2px 2px 0 #c0392b", letterSpacing:"1px" }}>MARIO KART WORLD</div>
+        <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize: isMobile ? "8px" : "10px", color:"#666", marginTop:"8px", lineHeight:"1.6" }}>BEST KART COMBO FINDER</div>
       </div>
+      
+      {/* Mobile Tab Navigation */}
+      {isMobile && (
+        <div style={{ display:"flex", borderBottom:"1px solid #ffffff15", background:"rgba(0,0,0,.2)" }}>
+          {[
+            { id:"characters", label:"Characters", icon:"👤" },
+            { id:"courses", label:"Courses", icon:"🏁" },
+            { id:"results", label:"Results", icon:"⭐" }
+          ].map(tab => (
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
+              flex:1, padding:"14px 8px", background: activeTab === tab.id ? "rgba(241,196,79,.1)" : "transparent",
+              border:"none", borderBottom: activeTab === tab.id ? "2px solid #f1c40f" : "2px solid transparent",
+              color: activeTab === tab.id ? "#f1c40f" : "#888", cursor:"pointer", fontSize:"14px", fontWeight:"600"
+            }}>
+              <span style={{ marginRight:"6px" }}>{tab.icon}</span>{tab.label}
+            </button>
+          ))}
+        </div>
+      )}
 
-      <div style={{ display:"flex", flex:1, minHeight:0 }}>
+      <div style={{ display:"flex", flex:1, minHeight:0, flexDirection: isMobile ? "column" : "row" }}>
 
         {/* COL 1 — Characters */}
-        <div style={{ width:"215px", minWidth:"215px", borderRight:"1px solid #ffffff15", display:"flex", flexDirection:"column", overflow:"hidden" }}>
-          <div style={{ padding:"8px 10px", borderBottom:"1px solid #ffffff10" }}>
-            <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"6px", color:"#f1c40f", marginBottom:"6px" }}>1 · CHARACTER (50)</div>
-            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search…"
-              style={{ width:"100%", padding:"5px 8px", background:"#ffffff0d", border:"1px solid #ffffff20", borderRadius:"4px", color:"#fff", fontSize:"11px", outline:"none", boxSizing:"border-box" }} />
+        <div style={{ 
+          width: isMobile ? "100%" : "280px", 
+          minWidth: isMobile ? "auto" : "280px", 
+          borderRight: isMobile ? "none" : "1px solid #ffffff15", 
+          display: isMobile && activeTab !== "characters" ? "none" : "flex", 
+          flexDirection:"column", 
+          overflow:"hidden",
+          flex: isMobile ? 1 : "none"
+        }}>
+          <div style={{ padding:"12px 16px", borderBottom:"1px solid #ffffff10" }}>
+            <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"10px", color:"#f1c40f", marginBottom:"10px" }}>SELECT CHARACTER</div>
+            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search characters…"
+              style={{ width:"100%", padding:"12px 14px", background:"#ffffff0d", border:"1px solid #ffffff20", borderRadius:"8px", color:"#fff", fontSize:"16px", outline:"none", boxSizing:"border-box" }} />
           </div>
-          <div style={{ overflowY:"auto", flex:1, padding:"5px 7px" }}>
+          <div style={{ overflowY:"auto", flex:1, padding:"12px 16px" }}>
             {weightOrder.filter(w=>grouped[w]).map(w => (
-              <div key={w} style={{ marginBottom:"9px" }}>
-                <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"5px", color:"#f1c40f88", borderLeft:"2px solid #f1c40f44", paddingLeft:"5px", marginBottom:"3px" }}>{w.toUpperCase()}</div>
+              <div key={w} style={{ marginBottom:"16px" }}>
+                <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"9px", color:"#f1c40f88", borderLeft:"3px solid #f1c40f44", paddingLeft:"10px", marginBottom:"8px" }}>{w.toUpperCase()}</div>
                 {grouped[w].map(c => (
-                  <button key={c.name} onClick={()=>selectChar(c)} style={{
-                    width:"100%", display:"flex", alignItems:"center", gap:"6px", padding:"5px 7px",
+                  <button key={c.name} onClick={()=>{ selectChar(c); if(isMobile) setActiveTab("courses"); }} style={{
+                    width:"100%", display:"flex", alignItems:"center", gap:"12px", padding:"12px 14px",
                     background: selChar?.name===c.name ? `${c.color}22` : "transparent",
-                    border: selChar?.name===c.name ? `1px solid ${c.color}55` : "1px solid transparent",
-                    borderRadius:"5px", cursor:"pointer", marginBottom:"2px", color:"#fff", transition:"all .1s"
+                    border: selChar?.name===c.name ? `2px solid ${c.color}55` : "1px solid transparent",
+                    borderRadius:"10px", cursor:"pointer", marginBottom:"6px", color:"#fff", transition:"all .1s"
                   }}>
-                    <span style={{ fontSize:"13px" }}>{c.emoji}</span>
+                    <span style={{ fontSize:"24px" }}>{c.emoji}</span>
                     <div style={{ textAlign:"left", flex:1 }}>
-                      <div style={{ fontSize:"10px", color: selChar?.name===c.name ? c.color : "#ccc" }}>{c.name}</div>
-                      {c.unlock !== "Default" && <div style={{ fontSize:"7px", color:"#555", marginTop:"1px" }}>🔒 {c.unlock}</div>}
+                      <div style={{ fontSize:"16px", fontWeight:"500", color: selChar?.name===c.name ? c.color : "#ccc" }}>{c.name}</div>
+                      {c.unlock !== "Default" && <div style={{ fontSize:"12px", color:"#666", marginTop:"4px" }}>🔒 {c.unlock}</div>}
                     </div>
                   </button>
                 ))}
@@ -316,40 +352,49 @@ export default function App() {
         </div>
 
         {/* COL 2 — Cups & Courses */}
-        <div style={{ width:"235px", minWidth:"235px", borderRight:"1px solid #ffffff15", display:"flex", flexDirection:"column", overflow:"hidden" }}>
-          <div style={{ padding:"8px 10px", borderBottom:"1px solid #ffffff10" }}>
-            <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"6px", color:"#3498db" }}>2 · CUP & COURSE</div>
+        <div style={{ 
+          width: isMobile ? "100%" : "300px", 
+          minWidth: isMobile ? "auto" : "300px", 
+          borderRight: isMobile ? "none" : "1px solid #ffffff15", 
+          display: isMobile && activeTab !== "courses" ? "none" : "flex", 
+          flexDirection:"column", 
+          overflow:"hidden",
+          flex: isMobile ? 1 : "none"
+        }}>
+          <div style={{ padding:"12px 16px", borderBottom:"1px solid #ffffff10" }}>
+            <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"10px", color:"#3498db" }}>SELECT COURSE</div>
+            {selChar && <div style={{ fontSize:"13px", color:"#888", marginTop:"6px" }}>Playing as: <span style={{ color: selChar.color }}>{selChar.name}</span></div>}
           </div>
-          <div style={{ overflowY:"auto", flex:1, padding:"5px 7px" }}>
+          <div style={{ overflowY:"auto", flex:1, padding:"12px 16px" }}>
             {cups.map(cup => (
-              <div key={cup.name} style={{ marginBottom:"3px" }}>
+              <div key={cup.name} style={{ marginBottom:"8px" }}>
                 <button onClick={()=>setSelCup(selCup?.name===cup.name ? null : cup)} style={{
-                  width:"100%", display:"flex", alignItems:"center", gap:"7px", padding:"7px 9px",
+                  width:"100%", display:"flex", alignItems:"center", gap:"12px", padding:"14px 16px",
                   background: selCup?.name===cup.name ? `${cup.color}1a` : "rgba(255,255,255,.03)",
-                  border: selCup?.name===cup.name ? `1px solid ${cup.color}55` : "1px solid #ffffff0e",
-                  borderRadius:"6px", cursor:"pointer", color:"#fff", marginBottom:"2px"
+                  border: selCup?.name===cup.name ? `2px solid ${cup.color}55` : "1px solid #ffffff0e",
+                  borderRadius:"10px", cursor:"pointer", color:"#fff", marginBottom:"4px"
                 }}>
-                  <span style={{ fontSize:"14px" }}>{cup.emoji}</span>
-                  <span style={{ fontSize:"10px", flex:1, textAlign:"left", color: selCup?.name===cup.name ? cup.color : "#ddd" }}>{cup.name}</span>
-                  {cup.locked && <span style={{ fontSize:"8px", color:"#555" }}>🔒</span>}
-                  <span style={{ fontSize:"9px", color:"#444" }}>{selCup?.name===cup.name?"▲":"▼"}</span>
+                  <span style={{ fontSize:"24px" }}>{cup.emoji}</span>
+                  <span style={{ fontSize:"16px", flex:1, textAlign:"left", fontWeight:"500", color: selCup?.name===cup.name ? cup.color : "#ddd" }}>{cup.name}</span>
+                  {cup.locked && <span style={{ fontSize:"14px", color:"#666" }}>🔒</span>}
+                  <span style={{ fontSize:"14px", color:"#555" }}>{selCup?.name===cup.name?"▲":"▼"}</span>
                 </button>
                 {selCup?.name===cup.name && (
-                  <div style={{ paddingLeft:"10px", paddingBottom:"3px" }}>
+                  <div style={{ paddingLeft:"16px", paddingBottom:"8px" }}>
                     {cup.courses.map(course => {
                       const t = tMeta[course.terrain] || tMeta.mixed;
                       const active = selCourse?.name===course.name;
                       return (
-                        <button key={course.name} onClick={()=>selectCourse(course)} style={{
-                          width:"100%", display:"flex", alignItems:"center", gap:"7px", padding:"6px 8px",
+                        <button key={course.name} onClick={()=>{ selectCourse(course); if(isMobile) setActiveTab("results"); }} style={{
+                          width:"100%", display:"flex", alignItems:"center", gap:"12px", padding:"12px 14px",
                           background: active ? `${t.color}22` : "rgba(255,255,255,.03)",
-                          border: active ? `1px solid ${t.color}66` : "1px solid #ffffff0a",
-                          borderRadius:"5px", cursor:"pointer", marginBottom:"2px", color:"#fff"
+                          border: active ? `2px solid ${t.color}66` : "1px solid #ffffff0a",
+                          borderRadius:"8px", cursor:"pointer", marginBottom:"6px", color:"#fff"
                         }}>
-                          <span style={{ fontSize:"11px" }}>{t.icon}</span>
+                          <span style={{ fontSize:"20px" }}>{t.icon}</span>
                           <div style={{ textAlign:"left" }}>
-                            <div style={{ fontSize:"10px", color: active?t.color:"#bbb" }}>{course.name}</div>
-                            <div style={{ fontSize:"7px", color:"#555", marginTop:"1px" }}>
+                            <div style={{ fontSize:"15px", fontWeight:"500", color: active?t.color:"#bbb" }}>{course.name}</div>
+                            <div style={{ fontSize:"12px", color:"#666", marginTop:"4px" }}>
                               {course.isNew ? "✨ New" : "🔁 Retro"} · {t.label}
                             </div>
                           </div>
@@ -364,36 +409,41 @@ export default function App() {
         </div>
 
         {/* COL 3 — Results */}
-        <div style={{ flex:1, overflowY:"auto", padding:"16px 20px" }}>
+        <div style={{ 
+          flex:1, 
+          overflowY:"auto", 
+          padding: isMobile ? "20px 16px" : "24px 28px",
+          display: isMobile && activeTab !== "results" ? "none" : "block"
+        }}>
           {!selChar && !selCourse ? (
-            <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", height:"100%", gap:"12px", opacity:.35 }}>
-              <div style={{ fontSize:"52px" }}>🏁</div>
-              <p style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"7px", color:"#aaa", textAlign:"center", lineHeight:"2.5" }}>
+            <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", height:"100%", gap:"16px", opacity:.5 }}>
+              <div style={{ fontSize:"72px" }}>🏁</div>
+              <p style={{ fontFamily:"'Press Start 2P',monospace", fontSize: isMobile ? "10px" : "12px", color:"#aaa", textAlign:"center", lineHeight:"2.2" }}>
                 PICK A CHARACTER<br/>& A COURSE<br/>FOR YOUR COMBO
               </p>
             </div>
           ) : (
-            <div style={{ maxWidth:"540px" }}>
+            <div style={{ maxWidth:"600px", margin: isMobile ? "0" : "0 auto" }}>
 
               {/* Header cards */}
-              <div style={{ display:"flex", gap:"10px", marginBottom:"13px", flexWrap:"wrap" }}>
+              <div style={{ display:"flex", gap:"14px", marginBottom:"18px", flexWrap:"wrap" }}>
                 {selChar && (
-                  <div style={{ flex:"1 1 180px", padding:"11px 14px", background:`${selChar.color}18`, border:`1px solid ${selChar.color}44`, borderRadius:"9px", display:"flex", alignItems:"center", gap:"10px" }}>
-                    <span style={{ fontSize:"28px" }}>{selChar.emoji}</span>
+                  <div style={{ flex:"1 1 200px", padding:"16px 18px", background:`${selChar.color}18`, border:`2px solid ${selChar.color}44`, borderRadius:"12px", display:"flex", alignItems:"center", gap:"14px" }}>
+                    <span style={{ fontSize:"40px" }}>{selChar.emoji}</span>
                     <div>
-                      <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"9px", color:selChar.color }}>{selChar.name}</div>
-                      <div style={{ fontSize:"9px", color:"#666", marginTop:"3px" }}>{selChar.weight}</div>
-                      {selChar.unlock !== "Default" && <div style={{ fontSize:"8px", color:"#555", marginTop:"2px" }}>🔒 {selChar.unlock}</div>}
+                      <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"12px", color:selChar.color }}>{selChar.name}</div>
+                      <div style={{ fontSize:"14px", color:"#777", marginTop:"6px" }}>{selChar.weight}</div>
+                      {selChar.unlock !== "Default" && <div style={{ fontSize:"12px", color:"#666", marginTop:"4px" }}>🔒 {selChar.unlock}</div>}
                     </div>
                   </div>
                 )}
                 {selCourse && tm && (
-                  <div style={{ flex:"1 1 180px", padding:"11px 14px", background:`${tm.color}14`, border:`1px solid ${tm.color}44`, borderRadius:"9px" }}>
-                    <div style={{ fontSize:"9px", color:"#555", marginBottom:"3px" }}>{selCup?.emoji} {selCup?.name}</div>
-                    <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"9px", color:tm.color }}>{tm.icon} {selCourse.name}</div>
-                    <div style={{ display:"flex", gap:"5px", marginTop:"5px", flexWrap:"wrap" }}>
-                      <span style={{ padding:"2px 6px", background:`${tm.color}22`, border:`1px solid ${tm.color}55`, borderRadius:"3px", fontSize:"8px", color:tm.color }}>{tm.label}</span>
-                      <span style={{ padding:"2px 6px", background:"rgba(255,255,255,.06)", borderRadius:"3px", fontSize:"8px", color:"#888" }}>{selCourse.isNew?"✨ New":"🔁 Retro"}</span>
+                  <div style={{ flex:"1 1 200px", padding:"16px 18px", background:`${tm.color}14`, border:`2px solid ${tm.color}44`, borderRadius:"12px" }}>
+                    <div style={{ fontSize:"13px", color:"#666", marginBottom:"6px" }}>{selCup?.emoji} {selCup?.name}</div>
+                    <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"12px", color:tm.color }}>{tm.icon} {selCourse.name}</div>
+                    <div style={{ display:"flex", gap:"8px", marginTop:"10px", flexWrap:"wrap" }}>
+                      <span style={{ padding:"6px 12px", background:`${tm.color}22`, border:`1px solid ${tm.color}55`, borderRadius:"6px", fontSize:"12px", color:tm.color }}>{tm.label}</span>
+                      <span style={{ padding:"6px 12px", background:"rgba(255,255,255,.06)", borderRadius:"6px", fontSize:"12px", color:"#999" }}>{selCourse.isNew?"✨ New":"🔁 Retro"}</span>
                     </div>
                   </div>
                 )}
@@ -401,15 +451,15 @@ export default function App() {
 
               {/* Course description */}
               {selCourse && (
-                <p style={{ fontSize:"11px", lineHeight:"1.7", color:"#888", background:"rgba(255,255,255,.03)", border:"1px solid #ffffff0e", borderRadius:"8px", padding:"10px 13px", margin:"0 0 12px" }}>
+                <p style={{ fontSize:"15px", lineHeight:"1.8", color:"#999", background:"rgba(255,255,255,.03)", border:"1px solid #ffffff0e", borderRadius:"12px", padding:"16px 18px", margin:"0 0 18px" }}>
                   {selCourse.desc}
                 </p>
               )}
 
               {/* Terrain breakdown */}
               {selCourse && (
-                <div style={{ padding:"12px 14px", background:"rgba(255,255,255,.03)", border:"1px solid #ffffff10", borderRadius:"9px", marginBottom:"12px" }}>
-                  <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"6px", color:"#666", marginBottom:"9px" }}>🗺️ TERRAIN BREAKDOWN</div>
+                <div style={{ padding:"18px 20px", background:"rgba(255,255,255,.03)", border:"1px solid #ffffff10", borderRadius:"12px", marginBottom:"18px" }}>
+                  <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"10px", color:"#777", marginBottom:"14px" }}>TERRAIN BREAKDOWN</div>
                   <MiniBar label="Straights — speed reward"  value={selCourse.straights} color="#e74c3c" />
                   <MiniBar label="Turns — handling reward"   value={selCourse.turns}     color="#3498db" />
                   <MiniBar label="Off-Road sections"         value={selCourse.offroad}   color="#27ae60" />
@@ -419,25 +469,25 @@ export default function App() {
 
               {/* Kart recommendation */}
               {selChar && combo && (
-                <div style={{ padding:"12px 14px", background:"rgba(255,255,255,.03)", border:`1px solid ${fc}44`, borderRadius:"9px", marginBottom:"12px" }}>
-                  <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"6px", color:fc, marginBottom:"10px" }}>
-                    {selCourse ? "⭐ COURSE-OPTIMISED KART" : "⭐ BEST KART COMBO"}
+                <div style={{ padding:"18px 20px", background:"rgba(255,255,255,.03)", border:`2px solid ${fc}44`, borderRadius:"12px", marginBottom:"18px" }}>
+                  <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"10px", color:fc, marginBottom:"14px" }}>
+                    {selCourse ? "COURSE-OPTIMISED KART" : "BEST KART COMBO"}
                   </div>
-                  <div style={{ display:"flex", gap:"8px", flexWrap:"wrap" }}>
+                  <div style={{ display:"flex", gap:"12px", flexWrap:"wrap" }}>
                     {[
                       { label:"PRIMARY", value:combo.kart,             icon:"🏎️", hi:true  },
                       { label:"ALT",     value:combo.alt,              icon:"🔄", hi:false },
                       { label:"FOCUS",   value:combo.focus.toUpperCase(),icon:"🎯",hi:false },
                     ].map(item => (
                       <div key={item.label} style={{
-                        flex:"1 1 90px", padding:"9px 10px", textAlign:"center",
+                        flex:"1 1 100px", padding:"14px 12px", textAlign:"center",
                         background: item.hi ? `${fc}18` : "rgba(255,255,255,.05)",
                         border: item.hi ? `2px solid ${fc}` : "1px solid #ffffff18",
-                        borderRadius:"7px"
+                        borderRadius:"10px"
                       }}>
-                        <div style={{ fontSize:"18px", marginBottom:"4px" }}>{item.icon}</div>
-                        <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"7px", color:item.hi?fc:"#ccc" }}>{item.value}</div>
-                        <div style={{ fontSize:"7px", color:"#444", marginTop:"3px" }}>{item.label}</div>
+                        <div style={{ fontSize:"28px", marginBottom:"8px" }}>{item.icon}</div>
+                        <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"9px", color:item.hi?fc:"#ccc" }}>{item.value}</div>
+                        <div style={{ fontSize:"11px", color:"#555", marginTop:"6px" }}>{item.label}</div>
                       </div>
                     ))}
                   </div>
@@ -446,8 +496,8 @@ export default function App() {
 
               {/* Stats */}
               {stats && combo && (
-                <div style={{ padding:"12px 14px", background:"rgba(255,255,255,.02)", border:"1px solid #ffffff0e", borderRadius:"9px", marginBottom:"12px" }}>
-                  <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"6px", color:"#555", marginBottom:"9px" }}>📊 COMBO STATS</div>
+                <div style={{ padding:"18px 20px", background:"rgba(255,255,255,.02)", border:"1px solid #ffffff0e", borderRadius:"12px", marginBottom:"18px" }}>
+                  <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"10px", color:"#666", marginBottom:"14px" }}>COMBO STATS</div>
                   <StatBar label="Speed"    value={stats.speed}    color="#e74c3c" highlight={combo.focus==="speed"} />
                   <StatBar label="Accel"    value={stats.accel}    color="#2ecc71" highlight={combo.focus==="acceleration"} />
                   <StatBar label="Weight"   value={stats.weight}   color="#f39c12" highlight={false} />
@@ -456,14 +506,14 @@ export default function App() {
               )}
 
               {/* AI Tip */}
-              <div style={{ padding:"12px 14px", background:"rgba(52,152,219,.06)", border:"1px solid #3498db33", borderRadius:"9px" }}>
-                <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"6px", color:"#3498db", marginBottom:"9px" }}>🤖 AI COACH TIP</div>
+              <div style={{ padding:"18px 20px", background:"rgba(52,152,219,.06)", border:"1px solid #3498db33", borderRadius:"12px" }}>
+                <div style={{ fontFamily:"'Press Start 2P',monospace", fontSize:"10px", color:"#3498db", marginBottom:"12px" }}>AI COACH TIP</div>
                 {!selChar || !selCourse ? (
-                  <p style={{ fontSize:"11px", color:"#444", margin:0 }}>Select both a character and a course for a tailored coaching tip.</p>
+                  <p style={{ fontSize:"15px", color:"#555", margin:0 }}>Select both a character and a course for a tailored coaching tip.</p>
                 ) : aiLoading ? (
-                  <p style={{ fontSize:"11px", color:"#666", margin:0 }}>Analysing {selChar.name} on {selCourse.name}… ⏳</p>
+                  <p style={{ fontSize:"15px", color:"#777", margin:0 }}>Analysing {selChar.name} on {selCourse.name}...</p>
                 ) : aiTip ? (
-                  <p style={{ fontSize:"11px", lineHeight:"1.8", color:"#ccc", margin:0 }}>{aiTip}</p>
+                  <p style={{ fontSize:"15px", lineHeight:"1.8", color:"#ccc", margin:0 }}>{aiTip}</p>
                 ) : null}
               </div>
             </div>
